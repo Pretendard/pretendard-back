@@ -32,7 +32,6 @@ public class DishService {
     }
 
     public void orderDish(List<OrderDishRequest> orderDishRequest) {
-        System.out.println(orderDishRequest);
         for( OrderDishRequest request : orderDishRequest) {
             log.info("주문한 메뉴 : " + request.getName());
             log.info("추가한 토핑 : " + request.getToppings());

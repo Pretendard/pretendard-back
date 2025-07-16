@@ -15,6 +15,18 @@ spring:
         hibernate:
           dialect: org.hibernate.dialect.PostgreSQLDialect
     open-in-view: false
+cloud:
+  aws:
+    s3:
+      bucket: ${BUCKET_NAME}
+    credentials:
+      access-key: ${S3_ACCESS_KEY}
+      secret-key: ${S3_SECRET_KEY}
+    region:
+      static: ap-northeast-2
+      auto: false
+    stack:
+      auto: false
 
 logging:
   level:

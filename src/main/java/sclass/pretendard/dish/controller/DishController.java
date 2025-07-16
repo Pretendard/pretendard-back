@@ -2,11 +2,13 @@ package sclass.pretendard.dish.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import sclass.pretendard.dish.domain.Dish;
 import sclass.pretendard.dish.dto.DishData;
 import sclass.pretendard.dish.dto.OrderDishRequest;
 import sclass.pretendard.dish.service.DishService;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -22,8 +24,8 @@ public class DishController {
     }
 
     @PostMapping
-    public Dish saveDish(@RequestBody DishData dishRequest) {
-        return dishService.saveDish(dishRequest);
+    public Dish saveDish(@RequestPart("dishRequest") DishData dishRequest, @RequestPart("image") MultipartFile image) throws IOException {
+        return dishService.saveDish(dishRequest,image);
     }
 
     @PostMapping("/order")

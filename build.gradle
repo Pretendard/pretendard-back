@@ -2,6 +2,9 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '3.5.3'
     id 'io.spring.dependency-management' version '1.1.7'
+    id 'org.owasp.dependencycheck' version '8.4.0'
+    id 'com.github.spotbugs' version '6.0.7'
+    id 'pmd'
 }
 
 group = 's-class'
@@ -28,6 +31,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
     implementation 'com.vladmihalcea:hibernate-types-60:2.21.1'
+    implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'org.postgresql:postgresql'
     annotationProcessor 'org.projectlombok:lombok'
@@ -37,4 +41,36 @@ dependencies {
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+spotbugs {
+    ignoreFailures = false
+    effort = 'max'
+    reportLevel = 'low'
+}
+
+spotbugsMain {
+    reports {
+        html {
+            required = true
+        }
+    }
+}
+
+spotbugsTest {
+    reports {
+        html {
+            required = true
+        }
+    }
+}
+
+pmd {
+    ignoreFailures = false
+    ruleSets = []
+}
+
+dependencyCheck {
+    format = 'HTML'
+    failBuildOnCVSS = 7.0
 }
